@@ -75,7 +75,7 @@ datatable(
 
 ```
 
-# Carte **\| Où nous avons échantillonné ?**
+# Carte **\| Où avons-nous échantillonné ?**
 
 Grâce à cette carte, vous pouvez identifier vos sites d'échantillonnage et repérer ceux de vos collègues également 👀
 
