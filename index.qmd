@@ -9,7 +9,7 @@ lang: fr
 
 format:
   html:
-    code-fold: false
+    code-fold: true
     code-summary: "👈 Voir le code ici"
     toc: true
     toc-location: left
@@ -23,22 +23,25 @@ date: today
 description: "Ce document comporte une courte analyse de données sur la chimie et la biologie des lacs des Laurentides. Ces données ont été récoltées par vous 🫵"
 title-block-banner: "#f0f3f5"
 title-block-banner-color: "black"
-css: style.css
 ---
 
-# 1. Comment parcourir le document
+# Comment parcourir le document
 
-L'objectif de ce document est de vous offrir une vue d'ensemble des données physiques collectées par chacun d'entre vous lors du cours Terrain
+L'objectif de ce document est de vous offrir une vue d'ensemble des données physiques collectées par chacun d'entre vous lors du cours Terrain a travers une panoplie de graphique 🤓
 
-La table de matière située dans le coin haut droit, vous permet de circuler à travers les sections
+-   Cliquez sur l'onglet " 👈 voir le code ici" afin de consulter les lignes de codes nécessaire à la création de chaque graphique.
+
+-   La table de matière située dans le coin haut gauche, vous permet de circuler à travers les sections. 📖
+
+-   Les graphiques sont interactifs, alors laissez circuler votre curseur 🐁 sur les images pour voir des informations additionnelles apparaître.
 
 ![Photo du groupe A (gauche) et B (droite)](GroupPhotos.png)
 
-# 2. Tableau \| Base de données commune
+# Tableau \| **Base de données commune**
 
-Ce tableau contient les données recueuillies par 7 équipes du groupe A et 6 du groupe B. Ensemble, nous avons échantillonné 11 lacs, pour un total de 109 observations.
+Ce tableau contient les données recueillies par 7 équipes du groupe A et 6 du groupe B. Ensemble, nous avons échantillonné 11 lacs, pour un total de 109 observations.
 
-Parmi ces lacs, nous avons 4 lacs protégés dans le secteur de la SBL (Lac Triton, Croche, Cromwellet Geai) et 7 autres lacs anthropisés, hors SBL.
+Parmi ces lacs, nous avons 4 lacs protégés dans le secteur de la SBL (Lac Triton, Croche, Cromwell Geai) et 7 autres lacs anthropisés, hors de la SBL (HSBL).
 
 Plusieurs variables liés à la chimie de l'eau, la communauté de zooplancton et les émissions de CO2 vers l'atmosphère, ont été mesuré.
 
@@ -48,6 +51,7 @@ library(tidyverse) # librairie de visualisation de données
 library(plotly) # permet de rendre les diagrammes interactifs
 library(readxl) # permet d'ouvrir des fichier excel
 library(DT) # produit des tableau interactifs
+
 
 
 # Charger les données
@@ -69,9 +73,15 @@ datatable(
 
 ```
 
-# 3. Carte **\| Où nous avons échantillonné?**
+# Carte **\| Où nous avons échantillonné?**
 
-Grâce à cette carte, vous pouvez identifier vos sites d'échantillonnage et repérer ceux de vos collègues également. Le lac ayant été le plus souvent échantillonné cette année est le Lac Triton 🏆 (18 échantillons), suivit du lac Croche🥈 (15 échantillons) et le lac Crowmell 🥉 (14 échantillons). Bravo aux équipes A2, A5, B2, B5 pour ce travail collectif!
+Grâce à cette carte, vous pouvez identifier vos sites d'échantillonnage et repérer ceux de vos collègues également 👀
+
+Et la médaille d'or🥇 pour le lac ayant été le plus souvent échantillonné est remporté par...
+
+le Lac Triton 🏆 (18 échantillons), suivit du lac Croche🥈 (15 échantillons) et du lac Crowmell 🥉 (14 échantillons).
+
+Bravo aux équipes A2, A5, B2, B5 pour ce travail collectif! 👏
 
 ```{r, message=FALSE, warning=FALSE}
 
@@ -82,21 +92,8 @@ lake_counts <- data %>%
   group_by(LAC) %>%
   summarise(n_samples = n())
 
-print(lake_counts)
-# Renommer la colonne ÉQUIPE si besoin
-# names(data)[names(data) == "ÉQUIPE"] <- "EQUIPE"
+#print(lake_counts)
 
-# Forcer les colonnes numériques
-#data$LATITUDE <- as.numeric(data$LATITUDE)
-#data$LONGITUDE <- as.numeric(data$LONGITUDE)
-
-# Vérification des coordonnées valides
-#data <- data[!is.na(data$LATITUDE) & !is.na(data$LONGITUDE), ]
-#data <- data[data$LATITUDE >= -90 & data$LATITUDE <= 90, ]
-#data <- data[data$LONGITUDE >= -180 & data$LONGITUDE <= 0, ]  # On suppose l'Amérique
-
-# Si la longitude est positive, on inverse (par sécurité)
-#data$LONGITUDE <- ifelse(data$LONGITUDE > 0, -abs(data$LONGITUDE), data$LONGITUDE)
 
 # Générer des couleurs (ajuster si n > 66)
 couleurs <- ifelse(data$GROUPE=="A", "purple","orange")
@@ -122,48 +119,50 @@ leaflet(data) %>%
 
 ```
 
-# 4. Diagramme de sucette **\| Conductivité de l’eau**
+# Diagramme de sucette \| **Conductivité de l’eau** 
 
-La conductivité de l'eau est une mesure de la capacité de l'eau à conduire un courant élecrtique. Elle est dû à la présence des ions dissous tels que les chlorures, les nitrates et les sulfates. Leurs apports lors de l'épandage du sel fait sur les routes en hiver, est à la base de l'augmentation de la conductivité dans les zones hors de la SBL.
+L'un des résultat les plus frappant de notre étude fut la hausse marqué de conductivité électrique de l'eau entre les lacs de la SBL et ceux qui ce situe hors de la SBL.
+
+La conductivité de l'eau est une mesure de la capacité de l'eau à conduire un courant élecrtique. Elle est dû à la présence des ions dissous tels que les chlorures, les nitrates et les sulfates.
+
+Leurs apports lors de l'épandage du sel sur les routes en hiver, est une des cause principale de l'augmentation de la conductivité dans les zones hors de la SBL, surtout au moment de la fonte des neiges au printemps.
+
+*Selon le CRE Laurentides, les eaux ayant une conductivité supérieure à 200 uS/cm sont considéré comme des eaux minérales et ne sont donc plus considéré comme de l'eau douce.* Le dépassement de se seuil peux avoir des impacts sur les espèces aquatiques qui sont adapté a des milieux d'eau douce. Le lac Rond a dépassé se seuil, alors que les lacs Echo et Connelly s'en rapproche.
 
 ```{r, message=FALSE, warning=FALSE}
-library(readxl)
-library(ggplot2)
-library(dplyr)
-library(plotly)
 
-# Charger les données
-df <- read_excel("Base de données commune.xlsx")
 
 # Filtrer les données nécessaires
-df_clean <- df %>%
-  select(ÉQUIPE, SECTEUR, Conductivité) %>%
+df_clean <- data %>%
+  select(EQUIPE, LAC, SECTEUR, Conductivité) %>%
   filter(!is.na(Conductivité))
 
 # Moyenne de la conductivité par ÉQUIPE et SECTEUR
 df_summary <- df_clean %>%
-  group_by(ÉQUIPE, SECTEUR) %>%
+  group_by(EQUIPE, SECTEUR,LAC) %>%
   summarise(Conductivité = mean(Conductivité, na.rm = TRUE)) %>%
   ungroup()
 
+#df_summary
 # Créer le graphique ggplot
-p <- ggplot(df_summary, aes(
+sucette <- ggplot(df_summary, 
+                  aes(
   x = Conductivité,
-  y = reorder(ÉQUIPE, Conductivité),
+  y = reorder(EQUIPE, Conductivité),
   color = SECTEUR,
   text = paste0(
-    "ÉQUIPE : ", ÉQUIPE, "<br>",
+    "LAC : ", LAC, "<br>",
     "SECTEUR : ", SECTEUR, "<br>",
     "Conductivité : ", round(Conductivité, 2), " µS/cm"
   )
 )) +
-  geom_segment(aes(x = 0, xend = Conductivité, yend = ÉQUIPE), size = 1.2, color = "gray") +
+  geom_segment(aes(x = 0, xend = Conductivité, yend = EQUIPE), size = 1.2, color = "gray") +
   geom_point(size = 4) +
-  scale_color_manual(c("orange", "purple"))+
+  #scale_color_manual(values=c("red", "blue"))+
   labs(
-    title = "Conductivité moyenne par ÉQUIPE et SECTEUR",
+    title = "Conductivité éléctrique de l'eau moyenne des lacs d'étude",
     x = "Conductivité (µS/cm)",
-    y = "ÉQUIPE"
+    y = "Équipe"
   ) +
   theme_minimal() +
   theme(
@@ -171,55 +170,48 @@ p <- ggplot(df_summary, aes(
     axis.title = element_text(size = 12, face = "bold")
   )
 
+#sucette
+
 # Rendre le graphique interactif
-ggplotly(p, tooltip = "text")
+ggplotly(sucette, tooltip = "text")
 
 ```
 
-## 4.1. Nuage des points **\|** Relation entre surface du lac et ratio de drainage
+# Nuage de points \| **Hydrographie des lacs**
 
-La majorité des points sont regroupés dans la zone où l'aire du lac est inférieure à 1ha. Ce qui démontre que plus l’aire du lac est petite, plus le ratio de drainage est élevé
+L'aire du bassin versant et du lacs sont généralement positivement relié. En effet, plus l’aire du lac plus le bassin versant qu'il occupe est petit lui aussi.
+
+Mais leurs taille respective n'a pas d'impact sur le temps de résidence de l'eau. Vous observerez que le lac croche de la SBL (petit lac de tête) et le lac de l'Achigan (le plus grand lac de la région) ont tout les deux un temps de résidence de l'eau similaire d'environ 1 an.
 
 ```{r, message=FALSE, warning=FALSE}
 
-library(readxl)
-library(dplyr)
-library(ggplot2)
-library(janitor)
-library(plotly)  # Pour l’interactivité
-
-# Charger et nettoyer la base
-df <- read_excel("Base de données commune.xlsx") %>%
-  clean_names()
-
-# Nettoyage des colonnes numériques
-df_clean <- df %>%
-  mutate(
-    aire_du_lac = as.numeric(gsub(",", ".", gsub("[^0-9,\\.]", "", aire_du_lac))),
-    ratio_drainage = as.numeric(gsub(",", ".", gsub("[^0-9,\\.]", "", ratio_drainage)))
-  ) %>%
-  filter(!is.na(aire_du_lac), !is.na(ratio_drainage), !is.na(secteur))
-
 # Créer le graphique ggplot
-p <- ggplot(df_clean, aes(
-  x = aire_du_lac,
-  y = ratio_drainage,
-  color = secteur,
+nuage <- ggplot(data, aes(
+  x = Aire_BV_km2,
+  y = Aire_lac_km2,
+  size=Temps_renouvellement_yr,
+  color = SECTEUR,
   text = paste0(
-    "Lac : ", lac, "<br>",
-    "Secteur : ", secteur, "<br>",
-    "Aire du lac : ", round(aire_du_lac, 2), " km²<br>",
-    "Ratio de drainage : ", round(ratio_drainage, 2)
+    "Lac : ", LAC, "<br>",
+    "Secteur : ", SECTEUR, "<br>",
+    "Temps de renouvellement: ", round(Temps_renouvellement_yr, 2),"<br>",
+    #"Aire du lac : ", round(Aire_lac_km2, 2), " km²<br>",
+    "Ratio de drainage : ", round(Ratio_Drainage, 2)
   )
 )) +
-  geom_point(size = 3, alpha = 0.8) +
+  geom_point(alpha = 0.8) +
   labs(
-    title = "Relation entre l’Aire du lac et le Ratio de drainage selon le secteur",
-    x = "Aire du lac (km²)",
-    y = "Ratio de drainage",
-    color = "Secteur"
+    title = "Hydrographie",
+    x = "Aire du bassin versant (km²)",
+    y = "Aire du lac (km²)",
+    color = "Secteur",
+    size= "Temps de renouvellement (années)"
   ) +
+  
   scale_color_manual(values = c("HSBL" = "red", "SBL" = "blue")) +
+  scale_y_log10()+
+  scale_x_log10()+
+  
   theme_minimal() +
   theme(
     plot.title = element_text(face = "bold", size = 14, hjust = 0.5),
@@ -227,40 +219,33 @@ p <- ggplot(df_clean, aes(
     legend.title = element_text(face = "bold")
   )
 
+
 # Convertir en graphique interactif
-ggplotly(p, tooltip = "text")
+ggplotly(nuage, tooltip = "text") 
 
 ```
 
-# 5. **Statut trophique**
+# Diagramme de bar \| **Statut trophique des lacs**
 
-## 5.1. Treemap / Concentration des nutriments
+Le phénomène d'eutrophisation des lacs se caracterise par une vieillissement prématuré due a un apport en nutriment plus élevé qui enrichis les lacs. Dans les Laurentides, les lacs sont typiquement oligotrophe (jeune), mais la présence humaine
 
-Successivement, les lacs Pin rouge, Echo et Connely ont une teneur élevée en phosphore total. La même tendance ainsi que le même ordre sontt également observés pour les autres nutriments (carbone organique et chlorophylle_a).
+Malgré que des mesures importante on été instauré pour limiter l'apport de nutriment des lacs dans ces régions au cours des dernières décennie, par la réfaction des fausse septiques, l’aménagement des bandes riveraines et l'interdiction d'épandage d'engrais etc., l'eutrophisation demeure un enjeu a surveiller pour les lacs des Laurentides.
 
-```{r, message=FALSE, warning=FALSE}
+Les lacs Pin Rouge et Echo on un statut trophique "mésotrophe", vous pouvez voir si bas les indices permettant d'établir ces qualifications. En effet, la concentration de chrolophyle de ces deux lacs dépasse le seuil oligo/mésotrophe.
 
-library(readxl)
-library(dplyr)
-library(janitor)
-library(plotly)
+Malgré que le lacs Rond ait d'importants enjeu d'apports en sel, sont statut trophique demeure oligotrophique car ces apports en nutriments sont mieux contrôlé.
 
-# Charger et nettoyer la base
-df <- read_excel("Base de données commune.xlsx") %>%
-  clean_names()
+```{r, message=FALSE, warning=FALSE,fig.width=5, fig.height=8}
 
-# Nettoyage des colonnes (virgules, symboles, texte parasite) + conversion
-df_clean <- df %>%
-  mutate(
-    phosphore_total = as.numeric(gsub(",", ".", gsub("[^0-9,\\.]", "", phosphore_total))),
-    chlorophylle_a = as.numeric(gsub(",", ".", gsub("[^0-9,\\.]", "", chlorophylle_a))),
-    carbone_organique_dissous = as.numeric(gsub(",", ".", gsub("[^0-9,\\.]", "", carbone_organique_dissous)))
-  ) %>%
-  filter(!is.na(lac))
+
+# Formater en numérique
+data$phosphore_total=as.numeric(data$phosphore_total)
+data$chlorophylle_a=as.numeric(data$chlorophylle_a)
+data$carbone_organique_dissous=as.numeric(data$carbone_organique_dissous)
 
 # Résumer : Moyenne par lac (pour avoir une seule barre par lac)
-df_summary <- df_clean %>%
-  group_by(lac) %>%
+trophic_summary <- data %>%
+  group_by(LAC) %>%
   summarise(
     phosphore_total = mean(phosphore_total, na.rm = TRUE),
     chlorophylle_a = mean(chlorophylle_a, na.rm = TRUE),
@@ -268,400 +253,218 @@ df_summary <- df_clean %>%
   ) %>%
   ungroup()
 
+
 # Phosphore total
 plot_phosphore <- plot_ly(
-  df_summary,
-  x = ~lac,
+  trophic_summary,
+  x = ~LAC,
   y = ~phosphore_total,
   type = "bar",
   name = "Phosphore total",
-  text = ~round(phosphore_total, 2),
-  textposition = "outside",
   marker = list(color = "steelblue")
 ) %>%
+  add_segments(x = "Achigan", xend = "Rond", 
+               y = 10, yend = 10,
+               line = list(color = "black", width = 1),
+               showlegend = FALSE) %>%
+  add_annotations(x = "Rond", y = 11,
+                  text = "Seuil oligo/méso",
+                  showarrow = FALSE,
+                  font = list(color = "black", size = 12),
+                  xanchor = "right") %>%
   layout(
     title = "Phosphore total par lac",
-    xaxis = list(title = "Lac"),
+    xaxis = list(title = ""),
     yaxis = list(title = "Phosphore total (µg/L)"),
     showlegend = FALSE
   )
 
+
 # Chlorophylle a
 plot_chlorophylle <- plot_ly(
-  df_summary,
-  x = ~lac,
+  trophic_summary,
+  x = ~LAC,
   y = ~chlorophylle_a,
   type = "bar",
   name = "Chlorophylle a",
-  text = ~round(chlorophylle_a, 2),
-  textposition = "outside",
   marker = list(color = "forestgreen")
 ) %>%
+    add_segments(x = "Achigan", xend = "Rond", 
+               y = 3, yend = 3,
+               line = list(color = "black", width = 1),
+               showlegend = FALSE) %>%
+  add_annotations(x = "Rond", y = 4,
+                  text = "Seuil oligo/méso",
+                  showarrow = FALSE,
+                  font = list(color = "black", size = 12),
+                  xanchor = "right") %>%
   layout(
     title = "Chlorophylle a par lac",
-    xaxis = list(title = "Lac"),
+    xaxis = list(title = ""),
     yaxis = list(title = "Chlorophylle a (µg/L)"),
     showlegend = FALSE
   )
 
 # Carbone organique dissous
 plot_carbone <- plot_ly(
-  df_summary,
-  x = ~lac,
+  trophic_summary,
+  x = ~LAC,
   y = ~carbone_organique_dissous,
   type = "bar",
   name = "Carbone organique dissous",
-  text = ~round(carbone_organique_dissous, 2),
-  textposition = "outside",
   marker = list(color = "orange")
 ) %>%
+  add_segments(x = "Achigan", xend = "Rond", 
+               y =5, yend = 5,
+               line = list(color = "black", width = 1),
+               showlegend = FALSE) %>%
+  add_annotations(x = "Rond", y = 6,
+                  text = "Seuil oligo/méso",
+                  showarrow = FALSE,
+                  font = list(color = "black", size = 12),
+                  xanchor = "right") %>%
   layout(
     title = "Carbone organique dissous par lac",
-    xaxis = list(title = "Lac"),
+    xaxis = list(title = ""),
     yaxis = list(title = "Carbone organique dissous (mg/L)"),
     showlegend = FALSE
   )
 
 # Affichage
-plot_phosphore
-plot_chlorophylle
-plot_carbone
+fig_combiné <- subplot(plot_phosphore, plot_chlorophylle, plot_carbone,
+                       nrows = 3, titleY = TRUE, titleX = TRUE
+                      ) %>% 
+  layout(title = 'Indice de statue trophique')
+fig_combiné
+
 ```
 
-## 5.2. Classement des lacs selon leur richesse en nutriments
+# Heatmap \| **Biogéographie du** **Zooplancton**
 
-Pour ce qui est de la quantité totale en nutriments, le lac le plus enrichi est le Pin rouge avec un total de 26.02 mg/l.
+Nous nous sommes amusé a characteriser la communauté de zooplancton de chacun des lacs d'étude. Vous verrez dans ce graphique quels espèces sont abondante et lesquels sont plus rare. Le
 
 ```{r, message=FALSE, warning=FALSE}
-library(readxl)
-library(dplyr)
-library(janitor)
-library(ggplot2)
-library(plotly)
 
-# Charger et nettoyer la base
-df <- read_excel("Base de données commune.xlsx") %>%
-  clean_names()
+# Sommariser la base de données (0/1)
+presence_absence <- data %>%
+  select(LAC, 42:54) %>%
+  group_by(LAC) %>%
+  summarise(across(everything(), ~max(.x, na.rm = TRUE)), .groups = 'drop') 
 
-# Nettoyer et convertir les valeurs en numériques (si texte ou NA)
-df_clean <- df %>%
-  filter(!is.na(lac), lac != "") %>%
+
+# Étape 2: convertir en format long
+heatmap_data <- presence_absence %>%
+  pivot_longer(cols = -LAC, 
+               names_to = "Espèce", 
+               values_to = "Présence") %>%
   mutate(
-    phosphore_total = suppressWarnings(as.numeric(phosphore_total)),
-    chlorophylle_a = suppressWarnings(as.numeric(chlorophylle_a)),
-    carbone_organique_dissous = suppressWarnings(as.numeric(carbone_organique_dissous))
-  ) %>%
-  filter(!is.na(phosphore_total) | !is.na(chlorophylle_a) | !is.na(carbone_organique_dissous))
+    # Convertir 0/1 enprésent/absent
+    Presence_factor = factor(Présence, levels = c(0, 1), labels = c("Absent", "Présent"))
+  )
 
-# Calculer les moyennes par lac
-df_summary <- df_clean %>%
-  group_by(lac) %>%
-  summarise(
-    moy_phosphore = mean(phosphore_total, na.rm = TRUE),
-    moy_chlorophylle = mean(chlorophylle_a, na.rm = TRUE),
-    moy_carbone = mean(carbone_organique_dissous, na.rm = TRUE),
-    .groups = "drop"
-  ) %>%
-  mutate(
-    total_nutriments = rowSums(across(starts_with("moy_")), na.rm = TRUE)
-  ) %>%
-  arrange(desc(total_nutriments))
-
-# Créer le graphique ggplot
-p <- ggplot(df_summary, aes(x = reorder(lac, total_nutriments), y = total_nutriments,
-                            text = paste("Lac :", lac,
-                                         "<br>Phosphore :", round(moy_phosphore, 2),
-                                         "<br>Chlorophylle :", round(moy_chlorophylle, 2),
-                                         "<br>Carbone org. dissous :", round(moy_carbone, 2),
-                                         "<br>Total nutriments :", round(total_nutriments, 2)))) +
-  geom_col(fill = "#2b8cbe") +
-  coord_flip() +
-  labs(
-    title = "Classement des lacs selon leur richesse en nutriments",
-    x = "Lacs",
-    y = "Moyenne des concentrations (µg/L ou mg/L)"
+# Étape 3: Créer le graphique
+heatmap_plot <- ggplot(heatmap_data, aes(x = Espèce, y = LAC, fill = Presence_factor)) +
+  geom_tile(color = "white", size = 0.5) +
+  scale_fill_manual(
+    values = c("Absent" = "#440154FF", "Présent" = "#FDE725FF"),
+    name = "Status"
   ) +
+  theme_minimal() +
+  theme(
+    # Rotate x-axis labels for better readability
+    axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1, size = 10),
+    axis.text.y = element_text(size = 10),
+    axis.title = element_text(size = 12, face = "bold"),
+    legend.title = element_text(size = 11, face = "bold"),
+    legend.text = element_text(size = 10),
+    panel.grid = element_blank(),
+    plot.title = element_text(size = 14, face = "bold", hjust = 0.5),
+    plot.margin = margin(20, 20, 20, 20)
+  ) +
+  labs(
+    title = "Distribution des zooplanctons a travers nos lacs d'étude",
+    x = "Zooplancton",
+    y = "Lac",
+  )
+
+ggplotly(heatmap_plot)
+```
+
+# Classement \| **Qui était le plus grand émetteur de CO~2~?**
+
+Le lacs Pin rouge fut le lacs ayant les plus grand flux de CO2 envers l'atmopshère (par unité de surface), alors que le lac Echo était le seul agissant comme un puit net de CO2 envers l'atmosphère. Tout les deux sont des lacs classé "mésotrophe" comme nous avons vu plus haut ce qui peut contribuer a augmenter l'écart des flux de CO2 (tant positivement que négativement).
+
+Toutefois, quand vient le temps de déterminer quel lac fut le plus grand émètteur de CO2, c'est le lac de l'Achigan qui remporte haute la main 🏆. Lors qu'on calcule les émissions totale d'un lac, c'est la taille qui fait toute la différence.
+
+Vous constaterez également que le lac Geai (notre plus petit lac d'étude) avait des flux de CO2 d'une quantité non négligeable, mais ça petite taille rend ces émissions minime. Cela ne veut toute fois pas dire que les petits lacs ne sont pas des sources importante de CO2 envers l'atmosphère, au contraire, il sont très important parce qu'ils sont abondant! La force est dans la taille, mais aussi dans le nombre 💪.
+
+```{r, message=FALSE, warning=FALSE,fig.height=6}
+
+
+# Sommariser les données
+CO2_summary <- data %>%
+  select(LAC, CO2_Flux_mgCm2d, CO2_Emission_TgCyr) %>%
+  group_by(LAC) %>%
+  summarise(
+    CO2_Flux_mgCm2d = mean(CO2_Flux_mgCm2d, na.rm = TRUE),
+    CO2_Emission_TgCyr = mean(CO2_Emission_TgCyr, na.rm = TRUE),
+    n_observations = n(), # Count non-NA observations
+    .groups = 'drop'
+  ) 
+
+
+# Create rankings
+flux_ranking <- CO2_summary %>%
+  arrange(desc(CO2_Flux_mgCm2d)) %>%
+  mutate(flux_rank = row_number()) %>%
+  select(LAC, CO2_Flux_mgCm2d, flux_rank, n_observations)
+
+
+emissions_ranking <- CO2_summary %>%
+  arrange(desc(CO2_Emission_TgCyr)) %>%
+  mutate(emissions_rank = row_number()) %>%
+  select(LAC, CO2_Emission_TgCyr, emissions_rank, n_observations)
+
+# CO2 flux plot with tooltip
+flux_plot <- ggplot(flux_ranking, aes(x = CO2_Flux_mgCm2d, y = LAC,
+                                      text = paste("Lac:", LAC,
+                                                   "<br>Flux CO2:", round(CO2_Flux_mgCm2d, 2), "mg C/m²/année",
+                                                   "<br>Nombre d'observations:", n_observations))) +
+  geom_col(fill = "steelblue") +
+  labs(x = "Flux de CO2 (mg C / m2 / année)",
+       y = "Lac") +
   theme_minimal()
 
-# Rendre le graphique interactif
-ggplotly(p, tooltip = "text")
+# CO2 emissions plot with tooltip
+emissions_plot <- ggplot(emissions_ranking, aes(x = CO2_Emission_TgCyr, y = LAC,
+                                                text = paste("Lac:", LAC,
+                                                             "<br>Émissions CO2:", round(CO2_Emission_TgCyr, 2), "Tg C/année",
+                                                             "<br>Nombre d'observations:", n_observations))) +
+  geom_col(fill = "coral") +
+  labs(x = "Emissions de CO2 (Tg C / année)",
+       y = NULL) +
+  theme_minimal()
+
+# Convert to plotly and combine
+fig_combiné_CO2 <- subplot(
+  ggplotly(flux_plot, tooltip = "text"), 
+  ggplotly(emissions_plot, tooltip = "text"), 
+  nrows = 1, titleY = TRUE, titleX = TRUE
+) %>% 
+  layout(title = 'Empreinte CO2 des lacs')
+
+fig_combiné_CO2
 
 ```
 
-# 6. Carte **\| Zoo plancton**
+# Mot de la fin
 
-La carte suivante, nous permet d’identifier les espèces de zooplanctons et les lacs où ils peuvent se retrouver. En terme numérique, la Bosmina ressort comme l’espèce la plus abondante alors que la Polyphemus la moins représentée.
+Merci de nous avoir lu et pour votre participation au cours.
 
-```{r, message=FALSE, warning=FALSE}
-library(readxl)
-library(dplyr)
-library(janitor)
-library(DT)
+Nous vous souhaitons une bonne continuité dans vos études.
 
-# Lire et nettoyer la base
-df <- read_excel("Base de données commune.xlsx") %>%
-  clean_names()
+Au plaisir de vous croiser sur le campus!
 
-# Liste des espèces zooplanctoniques
-zooplanctons <- c(
-  "calanoide", "cyclopoide", "bosmina", "daphnia", "holopedium",
-  "diaphanosoma", "chydorus", "leptodora", "polyphemus", "chaoborus",
-  "hydracarina", "chironomidae", "ostracoda"
-)
+-Audrey, Ornella, Félix, Marie-Pierre, Élodie, Léa et Sarah
 
-# Palette de couleurs (emoji ou fond HTML)
-species_colors <- c(
-  calanoide = "#FFD700",      # or / jaune
-  cyclopoide = "#FF6347",     # rouge clair
-  bosmina = "#1E90FF",        # bleu
-  daphnia = "#32CD32",        # vert
-  holopedium = "#DA70D6",
-  diaphanosoma = "#FFA500",
-  chydorus = "#87CEEB",
-  leptodora = "#800080",
-  polyphemus = "#A0522D",
-  chaoborus = "#008B8B",
-  hydracarina = "#006400",
-  chironomidae = "#FF1493",
-  ostracoda = "#6A5ACD"
-)
-
-# Créer un tableau binaire (présence/absence) pour chaque lac et espèce
-df_pres <- df %>%
-  select(lac, all_of(zooplanctons)) %>%
-  group_by(lac) %>%
-  summarise(across(everything(), ~ any(!is.na(.) & . > 0))) %>%
-  ungroup()
-
-# Remplacer TRUE par case colorée, FALSE par vide
-df_color <- df_pres
-
-for (z in zooplanctons) {
-  df_color[[z]] <- ifelse(
-    df_color[[z]],
-    paste0("<div style='width:20px;height:20px;background-color:", species_colors[[z]], ";border-radius:3px;margin:auto'></div>"),
-    ""
-  )
-}
-
-# Renommer les colonnes avec noms lisibles
-names(df_color) <- c("Lac", tools::toTitleCase(zooplanctons))
-
-# Créer le tableau interactif
-datatable(
-  df_color,
-  escape = FALSE,  # autoriser HTML dans les cellules
-  rownames = FALSE,
-  options = list(pageLength = 10, autoWidth = TRUE)
-)
-
-```
-
-# 7. Heatmap **\| Flux et émission de CO2**
-
-## 7.1. Variabilité au sein des lacs
-
-Les zones à forte émission se concentrent dans le secteur HSBL alors que dans le SBL, les zones sont globalement peu émettrices. Ce pourrait être dû à une combinaison de facteurs biologiques, physiques et anthropiques. Les principales zones du secteur HSBL à émissions marquées sont : le quai de biologie, le Centre du lac (pélagique), à proximité de la plage et le quai privé.
-
-```{r, message=FALSE, warning=FALSE}
-library(readxl)
-library(dplyr)
-library(janitor)
-library(plotly)
-
-# Charger et nettoyer les données
-df <- read_excel("Base de données commune.xlsx") %>%
-  clean_names()
-
-# Nettoyer les valeurs d’émissions (caractères → numériques fiables)
-df_clean <- df %>%
-  mutate(
-    emissions = as.numeric(gsub(",", ".", gsub("[^0-9,\\.]", "", emissions_co2_annuel_tg_c_co2_yr))),
-    zone = zone_du_lac_echantillonnee
-  ) %>%
-  filter(!is.na(emissions), !is.na(zone))
-
-# Regrouper les émissions par zone (total ou moyenne si nécessaire)
-df_grouped <- df_clean %>%
-  group_by(zone) %>%
-  summarise(total_emissions = sum(emissions, na.rm = TRUE)) %>%
-  ungroup()
-
-# Définir les nœuds
-nodes <- data.frame(name = c("Émissions CO₂", unique(df_grouped$zone)))
-
-# Créer les liens (flux) entre source et cibles
-links <- data.frame(
-  source = 0,  # "Émissions CO₂" → index 0
-  target = match(df_grouped$zone, nodes$name) - 1,  # correspondance des index
-  value = round(df_grouped$total_emissions, 2)
-)
-
-# Créer le diagramme Sankey
-plot_ly(
-  type = "sankey",
-  orientation = "h",
-  node = list(
-    label = nodes$name,
-    pad = 15,
-    thickness = 20,
-    color = "lightblue"
-  ),
-  link = list(
-    source = links$source,
-    target = links$target,
-    value = links$value,
-    label = paste("CO₂ :", links$value, "Tg/an")
-  )
-) %>%
-  layout(
-    title = "Sankey Diagram: Répartition des émissions de CO₂ par zone échantillonnée",
-    font = list(size = 12)
-  )
-
-```
-
-## 7.2. Dot plot / Emissions Annuelles CO2 par lac
-
-Le lac Achigan est celui qui a émis plus de CO2 avec un total de 1208.5 Tg CO2/ an suivi du lac Connely avec 344 Tg CO2/an.
-
-```{r, message=FALSE, warning=FALSE}
-library(readxl)
-library(dplyr)
-library(plotly)
-
-# Lecture des données
-data <- read_excel("Base de données commune.xlsx", sheet = "GEO1315_2025")
-
-# Nettoyage de la colonne CO2
-data_clean <- data %>%
-  rename(
-    CO2_raw = `Emissions CO₂ Annuel (Tg C-CO₂/yr)`
-  ) %>%
-  mutate(
-    CO2 = as.numeric(gsub(",", ".", gsub("[^0-9,\\.]", "", CO2_raw)))
-  ) %>%
-  filter(!is.na(CO2), !is.na(LAC)) %>%
-  group_by(LAC) %>%
-  summarise(Emission_CO2 = mean(CO2, na.rm = TRUE), .groups = "drop") %>%
-  arrange(desc(Emission_CO2))
-
-# Création du dot plot interactif
-plot_ly(
-  data_clean,
-  x = ~Emission_CO2,
-  y = ~reorder(LAC, Emission_CO2),
-  type = 'scatter',
-  mode = 'markers',
-  marker = list(size = 10, color = 'darkgreen'),
-  text = ~paste("Lac:", LAC, "<br>CO₂:", round(Emission_CO2, 3), "Tg C-CO₂/yr"),
-  hoverinfo = "text"
-) %>%
-  layout(
-    title = "Dot Plot : Émissions annuelles de CO₂ par lac",
-    xaxis = list(title = "Émissions CO₂ (Tg C-CO₂/yr)"),
-    yaxis = list(title = "Lacs", tickfont = list(size = 10)),
-    margin = list(l = 120)
-  )
-
-```
-
-# 8. Nuage de points **\| Hydrographie**
-
-## 8.1. Relation entre Temps renouv. et ratio drainage
-
-La majorité des points sont concentrés à gauche (temps de renouvellement \< 1 an), avec un ratio de drainage variant fortement. La tendance est que la majorité des lacs se renouvellent rapidement mais ont un temps de drainage très variable. Le cas spécifique du lac Cromwell avec un temps de renouvellement de 0.06 an soit 22 jours (très rapide) et un ratio de 94.08.
-
-```{r, message=FALSE, warning=FALSE}
-library(readxl)
-library(dplyr)
-library(plotly)
-
-# Chargement des données
-data <- read_excel("Base de données commune.xlsx", sheet = "GEO1315_2025")
-
-# Nettoyage et conversion des colonnes
-data_clean <- data %>%
-  mutate(
-    `Temps Renouvellement (année)` = as.numeric(gsub(",", ".", gsub("[^0-9,\\.]", "", `Temps Renouvellement (année)`))),
-    `Ratio Drainage` = as.numeric(gsub(",", ".", gsub("[^0-9,\\.]", "", `Ratio Drainage`)))
-  ) %>%
-  filter(!is.na(`Temps Renouvellement (année)`), !is.na(`Ratio Drainage`), !is.na(SECTEUR)) %>%
-  filter(SECTEUR %in% c("SBL", "HSBL"))
-
-# Définir les couleurs par secteur
-data_clean <- data_clean %>%
-  mutate(Couleur = ifelse(SECTEUR == "HSBL", "red", "blue"))
-
-# Création du scatterplot interactif
-plot_ly(
-  data = data_clean,
-  x = ~`Temps Renouvellement (année)`,
-  y = ~`Ratio Drainage`,
-  type = 'scatter',
-  mode = 'markers',
-  color = ~SECTEUR,
-  colors = c("SBL" = "blue", "HSBL" = "red"),
-  text = ~paste("Lac:", LAC,
-                "<br>Temps Renouvellement (année):", `Temps Renouvellement (année)`,
-                "<br>Ratio Drainage:", `Ratio Drainage`,
-                "<br>Secteur:", SECTEUR),
-  marker = list(size = 10),
-  hoverinfo = "text"
-) %>%
-  layout(
-    title = "Relation entre Temps de Renouvellement et Ratio de Drainage",
-    xaxis = list(title = "Temps de Renouvellement (années)"),
-    yaxis = list(title = "Ratio de Drainage"),
-    legend = list(title = list(text = "Secteur"))
-  )
-
-```
-
-## 8.2. Corrélation entre aire, volume et profondeur moyen
-
-Une corrélation positive entre l’aire et le volume des lacs ressort clairement; faisant que plus un lac est large, plus son volume tend à être grand. Cependant, cette relation est modulée par la profondeur moyenne. Il n’en reste pas que la profondeur est un facteur clé qui peut déterminer le volume, et pas seulement l’aire.
-
-```{r, message=FALSE, warning=FALSE}
-library(readxl)
-library(dplyr)
-library(plotly)
-
-# Lecture du fichier Excel
-data <- read_excel("Base de données commune.xlsx", sheet = "GEO1315_2025")
-
-# Nettoyage des colonnes numériques
-data_clean <- data %>%
-  mutate(
-    Aire = as.numeric(gsub(",", ".", gsub("[^0-9,\\.]", "", `Aire du lac`))),
-    Volume = as.numeric(gsub(",", ".", gsub("[^0-9,\\.]", "", `Volume du lac`))),
-    Profondeur_Moy = as.numeric(gsub(",", ".", gsub("[^0-9,\\.]", "", `Profondeur Moy.`)))
-  ) %>%
-  filter(!is.na(Aire), !is.na(Volume), !is.na(Profondeur_Moy))
-
-# Création du scatterplot 3D interactif
-plot_ly(
-  data_clean,
-  x = ~Aire,
-  y = ~Volume,
-  z = ~Profondeur_Moy,
-  type = "scatter3d",
-  mode = "markers",
-  marker = list(size = 4, color = ~Profondeur_Moy, colorscale = "Blues", showscale = TRUE),
-  text = ~paste("Lac:", LAC,
-                "<br>Aire:", round(Aire, 2), "km²",
-                "<br>Volume:", round(Volume, 2), "km³",
-                "<br>Profondeur Moyenne:", round(Profondeur_Moy, 1), "m"),
-  hoverinfo = "text"
-) %>%
-  layout(
-    title = "Scatterplot 3D : Aire, Volume et Profondeur Moyenne des lacs",
-    scene = list(
-      xaxis = list(title = "Aire du lac (km²)"),
-      yaxis = list(title = "Volume du lac (km³)"),
-      zaxis = list(title = "Profondeur Moyenne (m)")
-    )
-  )
-```
-
-## 
+![](Logo Terrain Hiver 2025_2.png){fig-align="center" width="400"}
