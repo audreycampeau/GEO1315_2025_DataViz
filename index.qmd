@@ -433,7 +433,7 @@ flux_plot <- ggplot(flux_ranking, aes(x = CO2_Flux_mgCm2d, y = LAC,
                                                    "<br>Flux CO2:", round(CO2_Flux_mgCm2d, 2), "mg C/m²/année",
                                                    "<br>Nombre d'observations:", n_observations))) +
   geom_col(fill = "steelblue") +
-  labs(x = "Flux de CO2 (mg C / m2 / année)",
+  labs(x = "Flux de CO2 (mg C / m2 / jr)",
        y = "Lac") +
   theme_minimal()
 
