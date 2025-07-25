@@ -394,7 +394,7 @@ ggplotly(heatmap_plot)
 
 # Classement \| **Qui était le plus grand émetteur de CO~2~?**
 
-Le lacs Pin rouge fut le lacs ayant les plus haut flux de CO~2~ envers l’atmosphère, alors que le lac Echo était le seul agissant comme un puit net de CO2 envers l'atmosphère. Tout les deux sont des lacs classé "mésotrophe" comme nous avons vu plus haut ce qui peut contribuer a augmenter l'écart des flux de CO~2~ (tant positivement que négativement).
+Le lacs Pin rouge fut le lacs ayant les plus haut flux de CO~2~ envers l’atmosphère, alors que le lac Echo était le seul agissant comme un puit net de CO2 envers l'atmosphère. Tout les deux sont des lacs classé "mésotrophe", comme nous avons vu dans la section 6, ce qui peut contribuer a augmenter la variabilité des flux de CO~2~ (tant positivement que négativement).
 
 Toutefois, quand vient le temps de déterminer quel lac fut le plus grand émetteur de CO~2~, c'est le lac de l'Achigan qui remporte haut la main 🏆. Lorsqu'on calcule les émissions totale d'un lac, c'est la taille qui fait toute la différence.
 
