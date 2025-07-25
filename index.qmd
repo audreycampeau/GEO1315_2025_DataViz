@@ -20,22 +20,24 @@ format:
 
 fig-cap-location: margin
 date: today
-description: "Ce document comporte une courte analyse de données sur la chimie et la biologie des lacs des Laurentides. Ces données ont été récoltées par vous 🫵"
+description: "Ce document comporte une courte analyse de données sur les données physiques récoltées par vous 🫵 durant le cours terrain 1 en géographie "
 title-block-banner: "#f0f3f5"
 title-block-banner-color: "black"
 ---
 
-# Comment parcourir le document
+![Photo du groupe A (gauche) et B (droite)](GroupPhotos.png)
 
-L'objectif de ce document est de vous offrir une vue d'ensemble des données physiques collectées par chacun d'entre vous lors du cours Terrain a travers une panoplie de graphique 🤓
+# Lisez-moi \| **Comment parcourir ce document?**
 
--   Cliquez sur l'onglet " 👈 voir le code ici" afin de consulter les lignes de codes nécessaire à la création de chaque graphique.
+L'objectif de ce document est de vous offrir une vue d'ensemble des données physiques collectées par chacune des équipe lors du cours Terrain 🤓
+
+-   Vous trouverez dans les prochaines section une panoplie de graphique faisant un sommaire des différents volets du cours.
 
 -   La table de matière située dans le coin haut gauche, vous permet de circuler à travers les sections. 📖
 
 -   Les graphiques sont interactifs, alors laissez circuler votre curseur 🐁 sur les images pour voir des informations additionnelles apparaître.
 
-![Photo du groupe A (gauche) et B (droite)](GroupPhotos.png)
+-   N'ayez pas peur de la programmation ! Cliquez sur l'onglet " 👈 voir le code ici" afin de consulter les lignes de codes R nécessaire à la création de chaque graphique. Ce type de rapport est aussi à votre porté.
 
 # Tableau \| **Base de données commune**
 
@@ -77,11 +79,11 @@ datatable(
 
 Grâce à cette carte, vous pouvez identifier vos sites d'échantillonnage et repérer ceux de vos collègues également 👀
 
-Et la médaille d'or🥇 pour le lac ayant été le plus souvent échantillonné est remporté par...
+La médaille d'or🥇 pour le lac ayant été le plus souvent échantillonné est remporté par... 🥁
 
 le Lac Triton 🏆 (18 échantillons), suivit du lac Croche🥈 (15 échantillons) et du lac Crowmell 🥉 (14 échantillons).
 
-Bravo aux équipes A2, A5, B2, B5 pour ce travail collectif! 👏
+Bravo aux équipes A2, A5, B2, B5 pour ce travail collaboratif! 👏
 
 ```{r, message=FALSE, warning=FALSE}
 
@@ -121,13 +123,11 @@ leaflet(data) %>%
 
 # Diagramme de sucette \| **Conductivité de l’eau** 
 
-L'un des résultat les plus frappant de notre étude fut la hausse marqué de conductivité électrique de l'eau entre les lacs de la SBL et ceux qui ce situe hors de la SBL.
+L'un des constat les plus frappant de notre étude fut la différence marqué de conductivité électrique de l'eau entre les lacs de la SBL et ceux qui ce situe hors de la SBL.
 
-La conductivité de l'eau est une mesure de la capacité de l'eau à conduire un courant élecrtique. Elle est dû à la présence des ions dissous tels que les chlorures, les nitrates et les sulfates.
+La conductivité de l'eau est une mesure de la capacité de l'eau à conduire un courant élecrtique. Elle est dû à la présence des ions dissous dans l'eau. L'épandage du sel sur les routes en hiver, est une des cause principale de l'augmentation de la conductivité dans les zones hors de la SBL, surtout au moment de la fonte des neiges au printemps.
 
-Leurs apports lors de l'épandage du sel sur les routes en hiver, est une des cause principale de l'augmentation de la conductivité dans les zones hors de la SBL, surtout au moment de la fonte des neiges au printemps.
-
-*Selon le CRE Laurentides, les eaux ayant une conductivité supérieure à 200 uS/cm sont considéré comme des eaux minérales et ne sont donc plus considéré comme de l'eau douce.* Le dépassement de se seuil peux avoir des impacts sur les espèces aquatiques qui sont adapté a des milieux d'eau douce. Le lac Rond a dépassé se seuil, alors que les lacs Echo et Connelly s'en rapproche.
+Selon le [CRE Laurentides](https://crelaurentides.org/wp-content/uploads/2021/10/fiche_conductivite.pdf), les eaux ayant une conductivité supérieure à 200 uS/cm sont considéré comme des eaux minérales et non de l'eau douce. Le dépassement de se seuil peut avoir des impacts sur les espèces aquatiques qui sont adapté a des milieux d'eau douce. Le lac Rond dépasse ce seuil, alors que les lacs Echo et Connelly s'en rapproche.
 
 ```{r, message=FALSE, warning=FALSE}
 
@@ -179,9 +179,9 @@ ggplotly(sucette, tooltip = "text")
 
 # Nuage de points \| **Hydrographie des lacs**
 
-L'aire du bassin versant et du lacs sont généralement positivement relié. En effet, plus l’aire du lac plus le bassin versant qu'il occupe est petit lui aussi.
+La taille d'un bassin versant et de sont lac sont généralement positivement relié. En effet, plus l’aire du lac plus le bassin versant qu'il occupe est petit lui aussi.
 
-Mais leurs taille respective n'a pas d'impact sur le temps de résidence de l'eau. Vous observerez que le lac croche de la SBL (petit lac de tête) et le lac de l'Achigan (le plus grand lac de la région) ont tout les deux un temps de résidence de l'eau similaire d'environ 1 an.
+Mais leurs taille respective n'a pas necessairement d'impact sur le temps de résidence de l'eau. Vous observerez que le lac croche de la SBL (petit lac de tête) et le lac de l'Achigan (le plus grand lac de la région) ont tout les deux un temps de résidence de l'eau similaire d'environ 1 an.
 
 ```{r, message=FALSE, warning=FALSE}
 
@@ -227,13 +227,13 @@ ggplotly(nuage, tooltip = "text")
 
 # Diagramme de bar \| **Statut trophique des lacs**
 
-Le phénomène d'eutrophisation des lacs se caracterise par une vieillissement prématuré due a un apport en nutriment plus élevé qui enrichis les lacs. Dans les Laurentides, les lacs sont typiquement oligotrophe (jeune), mais la présence humaine
+Le phénomène d'eutrophisation des lacs se caracterise par une vieillissement prématuré due a un apport excessif en nutriment. Dans les Laurentides, les lacs sont typiquement oligotrophe (jeune), mais la présence humaine ammène un apport supplémentaire en nutriment qui peu enrichir les lacs.
 
-Malgré que des mesures importante on été instauré pour limiter l'apport de nutriment des lacs dans ces régions au cours des dernières décennie, par la réfaction des fausse septiques, l’aménagement des bandes riveraines et l'interdiction d'épandage d'engrais etc., l'eutrophisation demeure un enjeu a surveiller pour les lacs des Laurentides.
+Malgré que des mesures importante on été mise en place au cours des dernières décénnies pour limiter l'apport de nutriment des lacs dans plusieurs régions du Québec (p.ex. par la réfaction des fausse septiques, l’aménagement des bandes riveraines et l'interdiction d'épandage d'engrais etc.), l'eutrophisation demeure un enjeu a surveiller pour les lacs des Laurentides.
 
-Les lacs Pin Rouge et Echo on un statut trophique "mésotrophe", vous pouvez voir si bas les indices permettant d'établir ces qualifications. En effet, la concentration de chrolophyle de ces deux lacs dépasse le seuil oligo/mésotrophe.
+Les lacs Pin Rouge et Echo ont aujourd'hui un statut trophique de "mésotrophe", vous pouvez voir si bas les indices permettant d'établir ces qualifications. En effet, la concentration de chrolophyle de ces deux lacs dépasse le seuil oligo/mésotrophe.
 
-Malgré que le lacs Rond ait d'importants enjeu d'apports en sel, sont statut trophique demeure oligotrophique car ces apports en nutriments sont mieux contrôlé.
+Malgré que le lacs Rond ait d'importants enjeu d'apports en sel (comme démontré dans la section 4), sont statut trophique demeure oligotrophe car les apports en nutriments sont plus limité que ceux en sel.
 
 ```{r, message=FALSE, warning=FALSE,fig.width=5, fig.height=8}
 
@@ -341,7 +341,7 @@ fig_combiné
 
 # Heatmap \| **Biogéographie du** **Zooplancton**
 
-Nous nous sommes amusé a characteriser la communauté de zooplancton de chacun des lacs d'étude. Vous verrez dans ce graphique quels espèces sont abondante et lesquels sont plus rare. Le
+Nous nous sommes amusé a caractériser la communauté de zooplancton de chacun des lacs d'étude. Vous verrez dans ce graphique quels espèces sont abondante et lesquels sont plus rare. Les calanoides étaient présent dans tout les lacs d'étude, alors que les leptodora, ostracoda et polyphemus étaient rare.
 
 ```{r, message=FALSE, warning=FALSE}
 
@@ -392,11 +392,11 @@ ggplotly(heatmap_plot)
 
 # Classement \| **Qui était le plus grand émetteur de CO~2~?**
 
-Le lacs Pin rouge fut le lacs ayant les plus grand flux de CO2 envers l'atmopshère (par unité de surface), alors que le lac Echo était le seul agissant comme un puit net de CO2 envers l'atmosphère. Tout les deux sont des lacs classé "mésotrophe" comme nous avons vu plus haut ce qui peut contribuer a augmenter l'écart des flux de CO2 (tant positivement que négativement).
+Le lacs Pin rouge fut le lacs ayant les plus haut flux de CO~2~ envers l'atmopshère, alors que le lac Echo était le seul agissant comme un puit net de CO2 envers l'atmosphère. Tout les deux sont des lacs classé "mésotrophe" comme nous avons vu plus haut ce qui peut contribuer a augmenter l'écart des flux de CO~2~ (tant positivement que négativement).
 
-Toutefois, quand vient le temps de déterminer quel lac fut le plus grand émètteur de CO2, c'est le lac de l'Achigan qui remporte haute la main 🏆. Lors qu'on calcule les émissions totale d'un lac, c'est la taille qui fait toute la différence.
+Toutefois, quand vient le temps de déterminer quel lac fut le plus grand émetteur de CO~2~, c'est le lac de l'Achigan qui remporte haute la main 🏆. Lors qu'on calcule les émissions totale d'un lac, c'est la taille qui fait toute la différence.
 
-Vous constaterez également que le lac Geai (notre plus petit lac d'étude) avait des flux de CO2 d'une quantité non négligeable, mais ça petite taille rend ces émissions minime. Cela ne veut toute fois pas dire que les petits lacs ne sont pas des sources importante de CO2 envers l'atmosphère, au contraire, il sont très important parce qu'ils sont abondant! La force est dans la taille, mais aussi dans le nombre 💪.
+Vous constaterez également que le lac Geai (notre plus petit lac d'étude) avait des flux de CO~2~ d'une quantité non négligeable, mais ça petite taille rend ces émissions minimes. Cela ne veut toute fois pas dire que les petits lacs ne sont pas des sources importante de CO~2~ envers l'atmosphère, au contraire, il sont très important parce qu'ils sont nombreux! La force est dans la taille, mais aussi dans l'abondance 💪.
 
 ```{r, message=FALSE, warning=FALSE,fig.height=6}
 
@@ -459,7 +459,7 @@ fig_combiné_CO2
 
 # Mot de la fin
 
-Merci de nous avoir lu et pour votre participation au cours.
+Merci de nous avoir lu et d'avoir participé au cours.
 
 Nous vous souhaitons une bonne continuité dans vos études.
 
