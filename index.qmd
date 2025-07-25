@@ -1,6 +1,6 @@
 ---
 title: "Visualisation des données physiques"
-subtitle: "Terrain 1 en géographie (cohorte 2024)"
+subtitle: "Terrain 1 en géographie (cohorte 2025)"
 author: "François Kabambi & Audrey Campeau"
 editor: visual
 email: audrey.campeau@umontréal.ca
@@ -14,30 +14,30 @@ format:
     toc: true
     toc-location: left
     theme: default
-    toc-title: "Table of Content "
+    toc-title: "Table des matières"
     number-sections: true
     embed-resources: true
 
 fig-cap-location: margin
 date: today
-description: "Ce document comporte une courte analyse de données sur les données physiques récoltées par vous 🫵 durant le cours terrain 1 en géographie "
+description: "Ce document comporte une courte analyse de données sur les données physiques récoltées par vous 🫵, futures géographes, durant le cours terrain 1 en géographie "
 title-block-banner: "#f0f3f5"
 title-block-banner-color: "black"
 ---
 
 ![Photo du groupe A (gauche) et B (droite)](GroupPhotos.png)
 
-# Lisez-moi \| **Comment parcourir ce document?**
+# Lisez-moi \| **Comment parcourir ce document**
 
-L'objectif de ce document est de vous offrir une vue d'ensemble des données physiques collectées par chacune des équipe lors du cours Terrain 🤓
+L'objectif de ce document est de vous offrir une vue d'ensemble des données physiques collectées par chacune des équipes lors du cours Terrain 🤓
 
--   Vous trouverez dans les prochaines section une panoplie de graphique faisant un sommaire des différents volets du cours.
+-   Vous trouverez dans les prochaines sections une panoplie de graphique faisant un sommaire des différents volets du cours.
 
 -   La table de matière située dans le coin haut gauche, vous permet de circuler à travers les sections. 📖
 
 -   Les graphiques sont interactifs, alors laissez circuler votre curseur 🐁 sur les images pour voir des informations additionnelles apparaître.
 
--   N'ayez pas peur de la programmation ! Cliquez sur l'onglet " 👈 voir le code ici" afin de consulter les lignes de codes R nécessaire à la création de chaque graphique. Ce type de rapport est aussi à votre porté.
+-   N'ayez pas peur de la programmation ! Cliquez sur l'onglet " 👈 voir le code ici" afin de consulter les lignes de codes R nécessaires à la création de chaque graphique. Ce type de rapport est aussi à votre porté.
 
 # Tableau \| **Base de données commune**
 
@@ -45,7 +45,7 @@ Ce tableau contient les données recueillies par 7 équipes du groupe A et 6 du 
 
 Parmi ces lacs, nous avons 4 lacs protégés dans le secteur de la SBL (Lac Triton, Croche, Cromwell Geai) et 7 autres lacs anthropisés, hors de la SBL (HSBL).
 
-Plusieurs variables liés à la chimie de l'eau, la communauté de zooplancton et les émissions de CO2 vers l'atmosphère, ont été mesuré.
+Plusieurs variables liées à la chimie de l'eau, la communauté de zooplancton et les émissions de CO2 vers l'atmosphère, ont été mesurées.
 
 ```{r, message=FALSE, warning=FALSE}
 #Importer les libraries necessaires
@@ -75,13 +75,13 @@ datatable(
 
 ```
 
-# Carte **\| Où nous avons échantillonné?**
+# Carte **\| Où nous avons échantillonné ?**
 
 Grâce à cette carte, vous pouvez identifier vos sites d'échantillonnage et repérer ceux de vos collègues également 👀
 
-La médaille d'or🥇 pour le lac ayant été le plus souvent échantillonné est remporté par... 🥁
+Commençons par identifier qui étaient nos champions de l'échantillonnage. La médaille d'or🥇 pour le lac ayant été le plus souvent échantillonné est remporté par... 🥁
 
-le Lac Triton 🏆 (18 échantillons), suivit du lac Croche🥈 (15 échantillons) et du lac Crowmell 🥉 (14 échantillons).
+le Lac Triton 🏆 (18 échantillons), suivi du lac Croche🥈 (15 échantillons) et du lac Crowmell 🥉 (14 échantillons).
 
 Bravo aux équipes A2, A5, B2, B5 pour ce travail collaboratif! 👏
 
@@ -123,11 +123,11 @@ leaflet(data) %>%
 
 # Diagramme de sucette \| **Conductivité de l’eau** 
 
-L'un des constat les plus frappant de notre étude fut la différence marqué de conductivité électrique de l'eau entre les lacs de la SBL et ceux qui ce situe hors de la SBL.
+L'un des constats les plus frappant de notre étude fut la différence marquée de conductivité électrique de l'eau entre les lacs de la SBL et ceux qui ce situent hors de la SBL.
 
-La conductivité de l'eau est une mesure de la capacité de l'eau à conduire un courant élecrtique. Elle est dû à la présence des ions dissous dans l'eau. L'épandage du sel sur les routes en hiver, est une des cause principale de l'augmentation de la conductivité dans les zones hors de la SBL, surtout au moment de la fonte des neiges au printemps.
+La conductivité de l'eau est une mesure de la capacité de l'eau à conduire un courant électrique. Elle est dû à la présence des ions dissous dans l'eau. L'épandage du sel sur les routes en hiver, est une des cause principale de l'augmentation de la conductivité dans les zones hors de la SBL, surtout au moment de la fonte des neiges au printemps.
 
-Selon le [CRE Laurentides](https://crelaurentides.org/wp-content/uploads/2021/10/fiche_conductivite.pdf), les eaux ayant une conductivité supérieure à 200 uS/cm sont considéré comme des eaux minérales et non de l'eau douce. Le dépassement de se seuil peut avoir des impacts sur les espèces aquatiques qui sont adapté a des milieux d'eau douce. Le lac Rond dépasse ce seuil, alors que les lacs Echo et Connelly s'en rapproche.
+Selon le [CRE Laurentides](https://crelaurentides.org/wp-content/uploads/2021/10/fiche_conductivite.pdf), les eaux ayant une conductivité supérieure à 200 uS/cm sont considérées comme des eaux minérales et non de l'eau douce. Le dépassement de se seuil peut avoir des impacts sur les espèces aquatiques qui sont adaptées à des milieux d'eau douce. Le lac Rond dépasse se seuil, alors que les lacs Echo et Connelly s'en rapproche.
 
 ```{r, message=FALSE, warning=FALSE}
 
@@ -179,9 +179,9 @@ ggplotly(sucette, tooltip = "text")
 
 # Nuage de points \| **Hydrographie des lacs**
 
-La taille d'un bassin versant et de sont lac sont généralement positivement relié. En effet, plus l’aire du lac plus le bassin versant qu'il occupe est petit lui aussi.
+La taille d'un bassin versant et de son plan d'eau sont généralement positivement relié. En effet, plus l’aire du lac plus le bassin versant qu'il occupe est petit lui aussi.
 
-Mais leurs taille respective n'a pas necessairement d'impact sur le temps de résidence de l'eau. Vous observerez que le lac croche de la SBL (petit lac de tête) et le lac de l'Achigan (le plus grand lac de la région) ont tout les deux un temps de résidence de l'eau similaire d'environ 1 an.
+Mais leurs taille respective n'a pas nécessairement d'impact sur le temps de résidence de l'eau. Vous observerez que le lac croche de la SBL (petit lac de tête) et le lac de l'Achigan (le plus grand lac de la région) ont tous les deux un temps de résidence de l'eau similaire d'environ 1 an.
 
 ```{r, message=FALSE, warning=FALSE}
 
@@ -225,15 +225,15 @@ ggplotly(nuage, tooltip = "text")
 
 ```
 
-# Diagramme de bar \| **Statut trophique des lacs**
+# Diagramme en barres \| **Statut trophique des lacs**
 
-Le phénomène d'eutrophisation des lacs se caracterise par une vieillissement prématuré due a un apport excessif en nutriment. Dans les Laurentides, les lacs sont typiquement oligotrophe (jeune), mais la présence humaine ammène un apport supplémentaire en nutriment qui peu enrichir les lacs.
+Le phénomène d'eutrophisation des lacs se caractérise par une vieillissement prématuré dû à un apport excessif en nutriment. Dans les Laurentides, les lacs sont typiquement oligotrophe (jeune), mais la présence humaine amène un apport supplémentaire en nutriment qui peu enrichir les lacs.
 
-Malgré que des mesures importante on été mise en place au cours des dernières décénnies pour limiter l'apport de nutriment des lacs dans plusieurs régions du Québec (p.ex. par la réfaction des fausse septiques, l’aménagement des bandes riveraines et l'interdiction d'épandage d'engrais etc.), l'eutrophisation demeure un enjeu a surveiller pour les lacs des Laurentides.
+Malgré que des mesures importantes ont été mises en place au cours des dernières décénnies pour limiter l'apport de nutriment des lacs dans plusieurs régions du Québec (p.ex. par la réfection des fosses septiques, l’aménagement des bandes riveraines et l'interdiction d'épandage d'engrais etc.), l'eutrophisation demeure un enjeu a surveiller pour les lacs des Laurentides.
 
-Les lacs Pin Rouge et Echo ont aujourd'hui un statut trophique de "mésotrophe", vous pouvez voir si bas les indices permettant d'établir ces qualifications. En effet, la concentration de chrolophyle de ces deux lacs dépasse le seuil oligo/mésotrophe.
+Les lacs Pin Rouge et Echo ont aujourd'hui un statut trophique de "mésotrophe", vous pouvez voir si bas les indices permettant d'établir ces qualifications. En effet, la concentration de chrolophylle de ces deux lacs dépasse le seuil oligo/mésotrophe.
 
-Malgré que le lacs Rond ait d'importants enjeu d'apports en sel (comme démontré dans la section 4), sont statut trophique demeure oligotrophe car les apports en nutriments sont plus limité que ceux en sel.
+Malgré que le lacs Rond ait d'importants enjeu d'apports en sel (comme démontré dans la section 4), son statut trophique demeure oligotrophe car les apports en nutriments sont plus limité que ceux en sel.
 
 ```{r, message=FALSE, warning=FALSE,fig.width=5, fig.height=8}
 
@@ -334,14 +334,16 @@ plot_carbone <- plot_ly(
 fig_combiné <- subplot(plot_phosphore, plot_chlorophylle, plot_carbone,
                        nrows = 3, titleY = TRUE, titleX = TRUE
                       ) %>% 
-  layout(title = 'Indice de statue trophique')
+  layout(title = 'Indice de statut trophique')
 fig_combiné
 
 ```
 
 # Heatmap \| **Biogéographie du** **Zooplancton**
 
-Nous nous sommes amusé a caractériser la communauté de zooplancton de chacun des lacs d'étude. Vous verrez dans ce graphique quels espèces sont abondante et lesquels sont plus rare. Les calanoides étaient présent dans tout les lacs d'étude, alors que les leptodora, ostracoda et polyphemus étaient rare.
+Plongeons maintenant dans le monde microscopique mais fascinant du zooplancton 🔬. Nous nous sommes amusé a caractériser la communauté de zooplancton de chacun des lacs d'étude.
+
+Vous verrez dans ce graphique quels espèces sont abondante et lesquelles sont plus rare. Les calanoides étaient présent dans tous les lacs d'étude, alors que les leptodora, ostracoda et polyphemus étaient rare.
 
 ```{r, message=FALSE, warning=FALSE}
 
@@ -392,11 +394,11 @@ ggplotly(heatmap_plot)
 
 # Classement \| **Qui était le plus grand émetteur de CO~2~?**
 
-Le lacs Pin rouge fut le lacs ayant les plus haut flux de CO~2~ envers l'atmopshère, alors que le lac Echo était le seul agissant comme un puit net de CO2 envers l'atmosphère. Tout les deux sont des lacs classé "mésotrophe" comme nous avons vu plus haut ce qui peut contribuer a augmenter l'écart des flux de CO~2~ (tant positivement que négativement).
+Le lacs Pin rouge fut le lacs ayant les plus haut flux de CO~2~ envers l’atmosphère, alors que le lac Echo était le seul agissant comme un puit net de CO2 envers l'atmosphère. Tout les deux sont des lacs classé "mésotrophe" comme nous avons vu plus haut ce qui peut contribuer a augmenter l'écart des flux de CO~2~ (tant positivement que négativement).
 
-Toutefois, quand vient le temps de déterminer quel lac fut le plus grand émetteur de CO~2~, c'est le lac de l'Achigan qui remporte haute la main 🏆. Lors qu'on calcule les émissions totale d'un lac, c'est la taille qui fait toute la différence.
+Toutefois, quand vient le temps de déterminer quel lac fut le plus grand émetteur de CO~2~, c'est le lac de l'Achigan qui remporte haut la main 🏆. Lorsqu'on calcule les émissions totale d'un lac, c'est la taille qui fait toute la différence.
 
-Vous constaterez également que le lac Geai (notre plus petit lac d'étude) avait des flux de CO~2~ d'une quantité non négligeable, mais ça petite taille rend ces émissions minimes. Cela ne veut toute fois pas dire que les petits lacs ne sont pas des sources importante de CO~2~ envers l'atmosphère, au contraire, il sont très important parce qu'ils sont nombreux! La force est dans la taille, mais aussi dans l'abondance 💪.
+Vous constaterez également que le lac Geai (notre plus petit lac d'étude) avait des flux de CO~2~ d'une quantité non négligeable, mais sa petite taille rend ces émissions minimes. Cela ne veut toutefois pas dire que les petits lacs ne sont pas des sources importante de CO~2~ envers l'atmosphère, au contraire, il sont très important parce qu'ils sont nombreux! La force est dans la taille, mais aussi dans l'abondance 💪.
 
 ```{r, message=FALSE, warning=FALSE,fig.height=6}
 
@@ -465,6 +467,8 @@ Nous vous souhaitons une bonne continuité dans vos études.
 
 Au plaisir de vous croiser sur le campus!
 
--Audrey, Ornella, Félix, Marie-Pierre, Élodie, Léa et Sarah
+-Votre équipe terrain (Audrey, Ornella, Félix, Marie-Pierre, Élodie, Léa et Sarah)
 
 ![](Logo Terrain Hiver 2025_2.png){fig-align="center" width="400"}
+
+*Ce travail de programmation a été réalisé par François Kabambi, étudiant à la maîtrise au programme environnement et développement durable de l'université de Montréal, sous la supervision de Audrey Campeau.*
