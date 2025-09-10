@@ -384,7 +384,7 @@ heatmap_plot <- ggplot(heatmap_data, aes(x = Espèce, y = LAC, fill = Presence_f
     plot.margin = margin(20, 20, 20, 20)
   ) +
   labs(
-    title = "Distribution des zooplanctons a travers nos lacs d'étude",
+    title = "Distribution des zooplanctons à travers nos lacs d'étude",
     x = "Zooplancton",
     y = "Lac",
   )
@@ -471,4 +471,4 @@ Au plaisir de vous croiser sur le campus!
 
 ![](Logo%20Terrain%20Hiver%202025_2.png){fig-align="center" width="400"}
 
-*Ce travail de programmation a été réalisé par François Kabambi, étudiant à la maîtrise au programme environnement et développement durable de l'université de Montréal, sous la supervision de Audrey Campeau.*
+*Ce travail de programmation a été réalisé par François Kabambi, étudiant à la maîtrise au programme environnement et développement durable de l'université de Montréal, sous la direction d'Audrey Campeau.*
