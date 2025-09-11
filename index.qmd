@@ -57,8 +57,7 @@ library(DT) # produit des tableau interactifs
 
 
 # Charger les données
-#df <- read_xlsx("Base de données commune.xlsx")
-data <- read_xlsx("Base de données commune.xlsx")
+data = read_xlsx("Base de données commune.xlsx")
 
 # Afficher le tableau interactif avec des lignes plus serrées
 datatable(
@@ -90,7 +89,7 @@ Bravo aux équipes A2, A5, B2, B5 pour ce travail collaboratif! 👏
 library(leaflet) # Pour produire des cartes interactives
 library(htmltools)
 
-lake_counts <- data %>%
+lake_counts = data %>%
   group_by(LAC) %>%
   summarise(n_samples = n())
 
@@ -98,7 +97,7 @@ lake_counts <- data %>%
 
 
 # Générer des couleurs (ajuster si n > 66)
-couleurs <- ifelse(data$GROUPE=="A", "purple","orange")
+couleurs = ifelse(data$GROUPE=="A", "purple","orange")
 
 # Afficher la carte
 leaflet(data) %>%
@@ -133,19 +132,19 @@ Selon le [CRE Laurentides](https://crelaurentides.org/wp-content/uploads/2021/10
 
 
 # Filtrer les données nécessaires
-df_clean <- data %>%
+df_clean = data %>%
   select(EQUIPE, LAC, SECTEUR, Conductivité) %>%
   filter(!is.na(Conductivité))
 
 # Moyenne de la conductivité par ÉQUIPE et SECTEUR
-df_summary <- df_clean %>%
+df_summary = df_clean %>%
   group_by(EQUIPE, SECTEUR,LAC) %>%
   summarise(Conductivité = mean(Conductivité, na.rm = TRUE)) %>%
   ungroup()
 
 #df_summary
 # Créer le graphique ggplot
-sucette <- ggplot(df_summary, 
+sucette = ggplot(df_summary, 
                   aes(
   x = Conductivité,
   y = reorder(EQUIPE, Conductivité),
@@ -186,7 +185,7 @@ Mais leur taille respective n'a pas nécessairement d'impact sur le temps de ré
 ```{r, message=FALSE, warning=FALSE}
 
 # Créer le graphique ggplot
-nuage <- ggplot(data, aes(
+nuage = ggplot(data, aes(
   x = Aire_BV_km2,
   y = Aire_lac_km2,
   size=Temps_renouvellement_yr,
@@ -244,7 +243,7 @@ data$chlorophylle_a=as.numeric(data$chlorophylle_a)
 data$carbone_organique_dissous=as.numeric(data$carbone_organique_dissous)
 
 # Résumer : Moyenne par lac (pour avoir une seule barre par lac)
-trophic_summary <- data %>%
+trophic_summary = data %>%
   group_by(LAC) %>%
   summarise(
     phosphore_total = mean(phosphore_total, na.rm = TRUE),
@@ -255,7 +254,7 @@ trophic_summary <- data %>%
 
 
 # Phosphore total
-plot_phosphore <- plot_ly(
+plot_phosphore = plot_ly(
   trophic_summary,
   x = ~LAC,
   y = ~phosphore_total,
@@ -281,7 +280,7 @@ plot_phosphore <- plot_ly(
 
 
 # Chlorophylle a
-plot_chlorophylle <- plot_ly(
+plot_chlorophylle = plot_ly(
   trophic_summary,
   x = ~LAC,
   y = ~chlorophylle_a,
@@ -306,7 +305,7 @@ plot_chlorophylle <- plot_ly(
   )
 
 # Carbone organique dissous
-plot_carbone <- plot_ly(
+plot_carbone = plot_ly(
   trophic_summary,
   x = ~LAC,
   y = ~carbone_organique_dissous,
@@ -331,7 +330,7 @@ plot_carbone <- plot_ly(
   )
 
 # Affichage
-fig_combiné <- subplot(plot_phosphore, plot_chlorophylle, plot_carbone,
+fig_combiné = subplot(plot_phosphore, plot_chlorophylle, plot_carbone,
                        nrows = 3, titleY = TRUE, titleX = TRUE
                       ) %>% 
   layout(title = 'Indice de statut trophique')
@@ -348,14 +347,14 @@ Vous verrez dans ce graphique quelles espèces sont abondantes et lesquelles son
 ```{r, message=FALSE, warning=FALSE}
 
 # Sommariser la base de données (0/1)
-presence_absence <- data %>%
+presence_absence = data %>%
   select(LAC, 42:54) %>%
   group_by(LAC) %>%
   summarise(across(everything(), ~max(.x, na.rm = TRUE)), .groups = 'drop') 
 
 
 # Étape 2: convertir en format long
-heatmap_data <- presence_absence %>%
+heatmap_data = presence_absence %>%
   pivot_longer(cols = -LAC, 
                names_to = "Espèce", 
                values_to = "Présence") %>%
@@ -365,7 +364,7 @@ heatmap_data <- presence_absence %>%
   )
 
 # Étape 3: Créer le graphique
-heatmap_plot <- ggplot(heatmap_data, aes(x = Espèce, y = LAC, fill = Presence_factor)) +
+heatmap_plot = ggplot(heatmap_data, aes(x = Espèce, y = LAC, fill = Presence_factor)) +
   geom_tile(color = "white", size = 0.5) +
   scale_fill_manual(
     values = c("Absent" = "#440154FF", "Présent" = "#FDE725FF"),
@@ -404,7 +403,7 @@ Vous constaterez également que le lac Geai (notre plus petit lac d'étude) avai
 
 
 # Sommariser les données
-CO2_summary <- data %>%
+CO2_summary = data %>%
   select(LAC, CO2_Flux_mgCm2d, CO2_Emission_TgCyr) %>%
   group_by(LAC) %>%
   summarise(
@@ -416,19 +415,19 @@ CO2_summary <- data %>%
 
 
 # Create rankings
-flux_ranking <- CO2_summary %>%
+flux_ranking = CO2_summary %>%
   arrange(desc(CO2_Flux_mgCm2d)) %>%
   mutate(flux_rank = row_number()) %>%
   select(LAC, CO2_Flux_mgCm2d, flux_rank, n_observations)
 
 
-emissions_ranking <- CO2_summary %>%
+emissions_ranking = CO2_summary %>%
   arrange(desc(CO2_Emission_TgCyr)) %>%
   mutate(emissions_rank = row_number()) %>%
   select(LAC, CO2_Emission_TgCyr, emissions_rank, n_observations)
 
 # CO2 flux plot with tooltip
-flux_plot <- ggplot(flux_ranking, aes(x = CO2_Flux_mgCm2d, y = LAC,
+flux_plot = ggplot(flux_ranking, aes(x = CO2_Flux_mgCm2d, y = LAC,
                                       text = paste("Lac:", LAC,
                                                    "<br>Flux CO2:", round(CO2_Flux_mgCm2d, 2), "mg C/m²/année",
                                                    "<br>Nombre d'observations:", n_observations))) +
@@ -438,7 +437,7 @@ flux_plot <- ggplot(flux_ranking, aes(x = CO2_Flux_mgCm2d, y = LAC,
   theme_minimal()
 
 # CO2 emissions plot with tooltip
-emissions_plot <- ggplot(emissions_ranking, aes(x = CO2_Emission_TgCyr, y = LAC,
+emissions_plot = ggplot(emissions_ranking, aes(x = CO2_Emission_TgCyr, y = LAC,
                                                 text = paste("Lac:", LAC,
                                                              "<br>Émissions CO2:", round(CO2_Emission_TgCyr, 2), "Tg C/année",
                                                              "<br>Nombre d'observations:", n_observations))) +
@@ -448,7 +447,7 @@ emissions_plot <- ggplot(emissions_ranking, aes(x = CO2_Emission_TgCyr, y = LAC,
   theme_minimal()
 
 # Convert to plotly and combine
-fig_combiné_CO2 <- subplot(
+fig_combiné_CO2 = subplot(
   ggplotly(flux_plot, tooltip = "text"), 
   ggplotly(emissions_plot, tooltip = "text"), 
   nrows = 1, titleY = TRUE, titleX = TRUE
