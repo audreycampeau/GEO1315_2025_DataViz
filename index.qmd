@@ -23,6 +23,7 @@ date: today
 description: "Ce document comporte une courte analyse de données sur les données physiques récoltées par vous 🫵, futures géographes, durant le cours terrain 1 en géographie "
 title-block-banner: "#f0f3f5"
 title-block-banner-color: "black"
+categories: [R, Teaching, Limnology]
 ---
 
 ![Photo du groupe A (gauche) et B (droite)](GroupPhotos.png)
